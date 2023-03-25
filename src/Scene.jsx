@@ -9,8 +9,8 @@ export const Scene = () => {
     <Container>
       <Canvas gl={{ physicallyCorrectLights: true, antialias: true }}>
         <OrbitControls />
-        <ambientLight intensity={3} />
-        {/* <Environment preset="dawn" /> */}
+        <ambientLight intensity={1.5} />
+        <Environment preset="apartment" />
         {/* <directionalLight position={[3, 3, 3]} /> */}
         <Room />
       </Canvas>
