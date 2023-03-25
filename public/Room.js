@@ -17,6 +17,7 @@ export default function Model({ ...props }) {
       <mesh geometry={nodes.Floor.geometry} material={materials['Material.003']} position={[0, -0.003441, 0]} />
       <mesh geometry={nodes.Window.geometry} material={materials.Windowframe} position={[-2.9, 1.6, 0]} />
       <mesh geometry={nodes.WindowGlass.geometry} material={materials['Windowglass.001']} position={[-2.9, 1.6, 0]} />
+      <mesh geometry={nodes.GardenFloor.geometry} material={nodes.GardenFloor.material} position={[3, 0, 6]} />
     </group>
   )
 }

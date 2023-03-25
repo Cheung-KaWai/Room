@@ -7,7 +7,7 @@ import Room from "./Room";
 export const Scene = () => {
   return (
     <Container>
-      <Canvas gl={{ physicallyCorrectLights: true, antialias: true }} dpr={[1, 2]}>
+      <Canvas gl={{ physicallyCorrectLights: true, antialias: true }} dpr={[1, 2]} camera={{ fov: 50 }}>
         <OrbitControls />
         <ambientLight intensity={1.5} />
         <Environment preset="apartment" />

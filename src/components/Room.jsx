@@ -23,25 +23,25 @@ export default function Room({ ...props }) {
 
   //OUTERWALLS
   const colorOuter = useTexture("/textures/walls/material/color.jpg");
-  colorOuter.repeat.set(10, 10);
+  colorOuter.repeat.set(15, 15);
   colorOuter.flipY = false;
   colorOuter.wrapS = RepeatWrapping;
   colorOuter.wrapT = RepeatWrapping;
 
   const roughnessOuter = useTexture("/textures/walls/material/roughness.jpg");
-  roughnessOuter.repeat.set(10, 10);
+  roughnessOuter.repeat.set(15, 15);
   roughnessOuter.flipY = false;
   roughnessOuter.wrapS = RepeatWrapping;
   roughnessOuter.wrapT = RepeatWrapping;
 
   const normalOuter = useTexture("/textures/walls/material/normal.jpg");
-  normalOuter.repeat.set(10, 10);
+  normalOuter.repeat.set(15, 15);
   normalOuter.flipY = false;
   normalOuter.wrapS = RepeatWrapping;
   normalOuter.wrapT = RepeatWrapping;
 
   const aoOuter = useTexture("/textures/walls/material/ao.jpg");
-  aoOuter.repeat.set(10, 10);
+  aoOuter.repeat.set(15, 15);
   aoOuter.flipY = false;
   aoOuter.wrapS = RepeatWrapping;
   aoOuter.wrapT = RepeatWrapping;
@@ -49,9 +49,10 @@ export default function Room({ ...props }) {
   const outerWallsMaterial = new MeshStandardMaterial();
   outerWallsMaterial.map = colorOuter;
   outerWallsMaterial.normalMap = normalOuter;
+  outerWallsMaterial.normalScale = new Vector2(4, 4);
   outerWallsMaterial.roughnessMap = roughnessOuter;
   outerWallsMaterial.aoMap = aoOuter;
-  outerWallsMaterial.aoMapIntensity = 0.8;
+  outerWallsMaterial.aoMapIntensity = 0.5;
 
   //CEILING
   const lightmapCeiling = useTexture("/textures/ceiling/bakes/LM.jpg");
@@ -133,6 +134,46 @@ export default function Room({ ...props }) {
     opacity: 0.5,
   });
 
+  //GARDEN
+  const colorGarden = useTexture("/textures/garden/material/color.jpg");
+  colorGarden.repeat.set(0.65, 0.5);
+  // colorGarden.encoding = sRGBEncoding;
+  colorGarden.flipY = false;
+  colorGarden.wrapS = RepeatWrapping;
+  colorGarden.wrapT = RepeatWrapping;
+
+  const aoGarden = useTexture("/textures/garden/material/ao.jpg");
+  // colorGarden.encoding = sRGBEncoding;
+  aoGarden.repeat.set(0.65, 0.5);
+  aoGarden.flipY = false;
+  aoGarden.wrapS = RepeatWrapping;
+  aoGarden.wrapT = RepeatWrapping;
+
+  const normalGarden = useTexture("/textures/garden/material/normal.jpg");
+  // normalGarden.encoding = sRGBEncoding;
+  normalGarden.repeat.set(0.65, 0.5);
+  normalGarden.flipY = false;
+  normalGarden.wrapS = RepeatWrapping;
+  normalGarden.wrapT = RepeatWrapping;
+
+  const roughnessGarden = useTexture("/textures/garden/material/roughness.jpg");
+  // roughnessGarden.encoding = sRGBEncoding;
+  roughnessGarden.repeat.set(0.65, 0.5);
+  roughnessGarden.flipY = false;
+  roughnessGarden.wrapS = RepeatWrapping;
+  roughnessGarden.wrapT = RepeatWrapping;
+
+  const gardenMaterial = new MeshStandardMaterial();
+  gardenMaterial.map = colorGarden;
+  gardenMaterial.normalMap = normalGarden;
+  gardenMaterial.normalScale = new Vector2(4, 4);
+  gardenMaterial.aoMap = aoGarden;
+  gardenMaterial.aoMapIntensity = 1;
+  gardenMaterial.roughnessMap = roughnessGarden;
+  // gardenMaterial.roughness = 1.1;
+  gardenMaterial.envMapIntensity = 1.5;
+  // gardenMaterial.color = new Color("#1672bd");
+
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Base.geometry} material={materials["Material.002"]} position={[0, -0.003441, 0]} />
@@ -142,6 +183,7 @@ export default function Room({ ...props }) {
       <mesh ref={innerWalls} geometry={nodes.InnerWalls.geometry} material={innerWallsMaterial} position={[3, 1.111622, 0.965227]} />
       <mesh geometry={nodes.Window.geometry} material={windowFrameMaterial} position={[-2.9, 1.6, 0]} />
       <mesh geometry={nodes.WindowGlass.geometry} material={windowGlassMaterial} position={[-2.9, 1.6, 0]} />
+      <mesh geometry={nodes.GardenFloor.geometry} material={gardenMaterial} position={[3, 0, 6]} />
     </group>
   );
 }
