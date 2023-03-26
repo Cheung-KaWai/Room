@@ -10,14 +10,15 @@ export default function Model({ ...props }) {
   const { nodes, materials } = useGLTF('/room-transformed.glb')
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.Base.geometry} material={materials['Material.002']} position={[0, -0.003441, 0]} />
+      <mesh geometry={nodes.Base.geometry} material={materials.Material} position={[0, -0.003441, 0]} />
       <mesh geometry={nodes.Ceiling.geometry} material={materials['Material.001']} position={[0, 2.996559, 0]} />
       <mesh geometry={nodes.OuterWalls.geometry} material={materials['Material.004']} position={[-2.9, 1.6, 0]} />
       <mesh geometry={nodes.InnerWalls.geometry} material={nodes.InnerWalls.material} position={[3, 1.116622, 0.965227]} />
       <mesh geometry={nodes.Floor.geometry} material={materials['Material.003']} position={[0, -0.003441, 0]} />
       <mesh geometry={nodes.Window.geometry} material={materials.Windowframe} position={[-2.9, 1.6, 0]} />
       <mesh geometry={nodes.WindowGlass.geometry} material={materials['Windowglass.001']} position={[-2.9, 1.6, 0]} />
-      <mesh geometry={nodes.GardenFloor.geometry} material={nodes.GardenFloor.material} position={[3, 0, 6]} />
+      <mesh geometry={nodes.GardenFloor.geometry} material={materials['Material.005']} position={[3, 0, 6]} />
+      <mesh geometry={nodes.WoodPath.geometry} material={materials['Material.002']} position={[0, -0.003441, 0]} />
     </group>
   )
 }
