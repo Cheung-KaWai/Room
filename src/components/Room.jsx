@@ -21,6 +21,7 @@ export default function Room({ ...props }) {
     outerWalls.current.geometry.attributes.uv2 = outerWalls.current.geometry.attributes.uv;
     ceiling.current.geometry.attributes.uv2 = ceiling.current.geometry.attributes.uv;
     floor.current.geometry.attributes.uv2 = floor.current.geometry.attributes.uv;
+    floor.current.geometry.attributes.uv3 = floor.current.geometry.attributes.uv;
     woodPath.current.geometry.attributes.uv2 = woodPath.current.geometry.attributes.uv;
     gardenFloor.current.geometry.attributes.uv2 = gardenFloor.current.geometry.attributes.uv;
   }, []);
@@ -111,13 +112,14 @@ export default function Room({ ...props }) {
   lightMap.encoding = sRGBEncoding;
   lightMap.flipY = false;
 
-  const floorMaterial = materials["Material.003"];
+  const floorMaterial = new MeshStandardMaterial();
   floorMaterial.envMapIntensity = 0;
   floorMaterial.map = color;
   floorMaterial.normalMap = normal;
-  floorMaterial.roughnessMap = roughness;
   floorMaterial.lightMap = lightMap;
-  floorMaterial.lightMapIntensity = 50;
+  // floorMaterial.aoMap = ao;
+  floorMaterial.roughnessMap = roughness;
+  floorMaterial.lightMapIntensity = 20;
 
   //WINDOW
   const lightMapWindow = useTexture("/textures/windows/bakes/LM.jpg");
@@ -217,7 +219,7 @@ export default function Room({ ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Base.geometry} material={materials["Material.002"]} position={[0, -0.003441, 0]} />
-      <mesh ref={floor} geometry={nodes.Floor.geometry} material={materials["Material.003"]} position={[0, -0.003441, 0]} />
+      <mesh ref={floor} geometry={nodes.Floor.geometry} material={floorMaterial} position={[0, -0.003441, 0]} />
       <mesh ref={ceiling} geometry={nodes.Ceiling.geometry} material={ceilingMaterial} position={[0, 2.956559, 0]} />
       <mesh ref={outerWalls} geometry={nodes.OuterWalls.geometry} material={outerWallsMaterial} position={[-2.9, 1.595, 0]} />
       <mesh ref={innerWalls} geometry={nodes.InnerWalls.geometry} material={innerWallsMaterial} position={[3, 1.111622, 0.965227]} />
