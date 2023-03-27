@@ -7,7 +7,7 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { Color, DoubleSide, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, RepeatWrapping, Vector2, sRGBEncoding } from "three";
 
 export default function Room({ ...props }) {
-  const { nodes, materials } = useGLTF("/room-transformed.glb");
+  const { nodes, materials } = useGLTF("/models/room-transformed.glb");
   const group = useRef();
   const innerWalls = useRef();
   const outerWalls = useRef();
@@ -229,4 +229,4 @@ export default function Room({ ...props }) {
   );
 }
 
-useGLTF.preload("/room-transformed.glb");
+useGLTF.preload("/models/room-transformed.glb");
