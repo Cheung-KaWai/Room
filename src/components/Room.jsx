@@ -239,6 +239,8 @@ export default function Room({ ...props }) {
       <mesh geometry={nodes.WindowGlass.geometry} material={windowGlassMaterial} position={[-2.9, 1.6, 0]} />
       <mesh ref={gardenFloor} geometry={nodes.GardenFloor.geometry} material={gardenMaterial} position={[3, 0, 6]} />
       <mesh ref={woodPath} geometry={nodes.WoodPath.geometry} material={woodpathMaterial} position={[0, -0.003441, 0]} />
+      <mesh geometry={nodes.Pilar.geometry} material={materials["Material.004"]} position={[8.75, 1.1, 3.75]} />
+      <mesh geometry={nodes.OutdoorCeiling.geometry} material={materials["Material.006"]} position={[0, 2.996559, 0]} />
     </animated.group>
   );
 }
