@@ -20,7 +20,6 @@ export default function Room({ ...props }) {
 
   const [start, setStart] = useState(false);
   const { scale } = useSpring({ scale: start ? 1 : 0 });
-  console.log(scale);
 
   useEffect(() => {
     innerWalls.current.geometry.attributes.uv2 = innerWalls.current.geometry.attributes.uv;
@@ -73,7 +72,7 @@ export default function Room({ ...props }) {
 
   const ceilingMaterial = new MeshStandardMaterial();
   ceilingMaterial.lightMap = lightmapCeiling;
-  ceilingMaterial.lightMapIntensity = 100;
+  ceilingMaterial.lightMapIntensity = 50;
   ceilingMaterial.envMapIntensity = 0;
 
   //INNERWALS
@@ -83,7 +82,7 @@ export default function Room({ ...props }) {
 
   const innerWallsMaterial = new MeshStandardMaterial();
   innerWallsMaterial.lightMap = lightMapWalls;
-  innerWallsMaterial.lightMapIntensity = 100;
+  innerWallsMaterial.lightMapIntensity = 50;
   innerWallsMaterial.envMapIntensity = 0;
 
   //FLOOR

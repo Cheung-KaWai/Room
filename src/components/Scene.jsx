@@ -1,24 +1,31 @@
 import { Center, ContactShadows, Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import styled from "styled-components";
 import Room from "./Room";
 import { Loader } from "./Loader";
+import { CustomControls } from "./CustomControls";
+import { useZustand } from "../hooks/useZustand";
+import Room2 from "./Room2";
 
 export const Scene = () => {
-  const orbit = useRef();
-  // Vector3 {x: 4.85399409898707, y: 7.885380814144126, z: 13.63531731455013}
-  // {x: 4.754310781433894, y: -2.350123706942933, z: 1.712995996909236}
-  y: z: return (
+  const updateStore = useZustand("update");
+
+  return (
     <Container>
-      <Canvas gl={{ physicallyCorrectLights: true, antialias: true }} dpr={[1, 2]} camera={{ fov: 80 }}>
-        <OrbitControls ref={orbit} onChange={() => console.log(orbit)} target={[4.75, -2.35, 1.71]} />
-        <PerspectiveCamera position={[5.17, 10.48, 21.6]} makeDefault />
+      <Canvas
+        gl={{ physicallyCorrectLights: true, antialias: true }}
+        dpr={[1, 2]}
+        camera={{ fov: 80 }}
+        onPointerDown={() => updateStore("locked", true)}
+        onPointerUp={() => updateStore("locked", false)}
+      >
+        {/* <OrbitControls /> */}
+        <CustomControls />
         <ambientLight intensity={1.5} />
         <Environment preset="apartment" />
-        {/* <directionalLight position={[3, 3, 3]} /> */}
         <Suspense fallback={<Loader />}>
-          <Room />
+          <Room2 />
         </Suspense>
       </Canvas>
     </Container>
