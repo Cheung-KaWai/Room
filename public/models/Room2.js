@@ -12,8 +12,10 @@ export default function Model({ ...props }) {
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Ceiling.geometry} material={materials['Material.001']} position={[0, 2.996559, 0]} />
       <mesh geometry={nodes.OuterWalls.geometry} material={materials['Material.004']} position={[-2.9, 1.6, 0]} />
-      <mesh geometry={nodes.InnerWalls.geometry} material={nodes.InnerWalls.material} position={[3, 1.116622, 0.965227]} />
-      <mesh geometry={nodes.Floor.geometry} material={materials['Material.003']} position={[0, -0.003441, 0]} />
+      <mesh geometry={nodes.InnerWalls.geometry} material={materials['Material.008']} position={[3, 1.116622, 0.965227]} />
+      <mesh geometry={nodes.Floor.geometry} material={materials['Material.007']} position={[0, 0.008951, 0]} />
+      <mesh geometry={nodes.Cube.geometry} material={nodes.Cube.material} position={[8.69703, 1.072963, -2.575509]} scale={[1, 1.5, 1.5]} />
+      <mesh geometry={nodes.Cube001.geometry} material={nodes.Cube001.material} position={[8.69703, 1.072963, -4.57551]} rotation={[Math.PI, 0, Math.PI]} scale={[1, 1.5, 1.5]} />
     </group>
   )
 }

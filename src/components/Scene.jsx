@@ -7,6 +7,7 @@ import { Loader } from "./Loader";
 import { CustomControls } from "./CustomControls";
 import { useZustand } from "../hooks/useZustand";
 import Room2 from "./Room2";
+import { Perf } from "r3f-perf";
 
 export const Scene = () => {
   const updateStore = useZustand("update");
@@ -17,16 +18,21 @@ export const Scene = () => {
         gl={{ physicallyCorrectLights: true, antialias: true }}
         dpr={[1, 2]}
         camera={{ fov: 80 }}
-        onPointerDown={() => updateStore("locked", true)}
-        onPointerUp={() => updateStore("locked", false)}
+        onPointerDown={() => {
+          updateStore("locked", true);
+        }}
+        onPointerUp={() => {
+          updateStore("locked", false);
+        }}
       >
         {/* <OrbitControls /> */}
         <CustomControls />
-        <ambientLight intensity={1.5} />
+        <ambientLight intensity={0.5} />
         <Environment preset="apartment" />
         <Suspense fallback={<Loader />}>
           <Room2 />
         </Suspense>
+        <Perf position="top-left" />
       </Canvas>
     </Container>
   );
