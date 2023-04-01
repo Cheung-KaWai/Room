@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export const cameraStore = create((set) => ({
   locked: false,
-  camPos: [0, 2, 0],
+  camPos: [0, 1.7, 0],
   update: (name, value) => set({ [name]: value }),
 }));
 

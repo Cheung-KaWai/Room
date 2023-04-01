@@ -19,6 +19,7 @@ export default function Room2({ ...props }) {
   const floor = useRef();
   const innerWalls = useRef();
   const ceiling = useRef();
+  const shelves = useRef();
 
   const { nodes, materials } = useGLTF("/models/room.glb");
   const { camera } = useThree();
@@ -31,7 +32,6 @@ export default function Room2({ ...props }) {
 
   const handleCamPosition = (e) => {
     e.stopPropagation();
-    console.log("up");
     if (click) {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -40,7 +40,7 @@ export default function Room2({ ...props }) {
       const floorMesh = intersection.find((x) => x.object.name === "floor");
       if (floorMesh) {
         const { point } = floorMesh;
-        update("camPos", [point.x, 2, point.z]);
+        update("camPos", [point.x, 1.7, point.z]);
       }
     }
   };
@@ -49,11 +49,13 @@ export default function Room2({ ...props }) {
     innerWalls.current.geometry.attributes.uv2 = innerWalls.current.geometry.attributes.uv;
     ceiling.current.geometry.attributes.uv2 = ceiling.current.geometry.attributes.uv;
     floor.current.geometry.attributes.uv2 = floor.current.geometry.attributes.uv;
+    shelves.current.geometry.attributes.uv2 = shelves.current.geometry.attributes.uv;
   }, []);
 
-  const { lightMapIntensity, envMapIntensity } = useControls({
+  const { lightMapIntensity, envMapIntensity, colorChoice } = useControls({
     lightMapIntensity: { value: 10, min: 0, max: 100, step: 1 },
     envMapIntensity: { value: 0.5, min: 0, max: 10, step: 0.1 },
+    colorChoice: { value: "#263e3b" },
   });
 
   //CEILING
@@ -75,11 +77,22 @@ export default function Room2({ ...props }) {
   colorWalls.flipY = false;
   colorWalls.encoding = sRGBEncoding;
 
+  const aoWalls = useTexture("/textures/walls/bakes/ao.jpg");
+  aoWalls.flipY = false;
+  aoWalls.encoding = sRGBEncoding;
+
   const innerWallsMaterial = new MeshStandardMaterial();
   innerWallsMaterial.lightMap = lightMapWalls;
   innerWallsMaterial.lightMapIntensity = lightMapIntensity;
   innerWallsMaterial.envMapIntensity = 0;
-  // innerWallsMaterial.map = colorWalls;
+
+  const innerWallsMaterial2 = new MeshStandardMaterial();
+  innerWallsMaterial2.lightMap = lightMapWalls;
+  innerWallsMaterial2.lightMapIntensity = lightMapIntensity;
+  innerWallsMaterial2.envMapIntensity = 0;
+  innerWallsMaterial2.aoMap = aoWalls;
+  innerWallsMaterial2.aoMapIntensity = 0.5;
+  innerWallsMaterial2.color = new Color(colorChoice);
 
   //FLOOR
   const lightMapFloor = useTexture("/textures/floor/bakes/LM.jpg");
@@ -114,8 +127,18 @@ export default function Room2({ ...props }) {
   floorMaterial.normalScale = new Vector2(10, 10);
   floorMaterial.lightMap = lightMapFloor;
   floorMaterial.lightMapIntensity = lightMapIntensity;
-  // floorMaterial.aoMap = ao;
-  // floorMaterial.roughnessMap = roughness;
+  floorMaterial.roughnessMap = roughness;
+  floorMaterial.roughness = 1.75;
+
+  //SHELVES
+  const colorShelves = useTexture("/textures/walls/bakes/color.jpg");
+  colorShelves.encoding = sRGBEncoding;
+  colorShelves.flipY = false;
+
+  const shelvesMaterial = new MeshStandardMaterial({
+    map: colorShelves,
+    envMapIntensity: envMapIntensity,
+  });
 
   return (
     <group
@@ -155,17 +178,16 @@ export default function Room2({ ...props }) {
         position={[0, 0.008951, 0]}
       />
       <mesh
+        ref={shelves}
         geometry={nodes.Cube.geometry}
-        material={nodes.Cube.material}
-        position={[8.69703, 1.072963, -2.575509]}
+        material={shelvesMaterial}
+        position={[8.69903, 1.072963, -2.575509]}
         scale={[1, 1.5, 1.5]}
       />
       <mesh
-        geometry={nodes.Cube001.geometry}
-        material={nodes.Cube001.material}
-        position={[8.69703, 1.072963, -4.57551]}
-        rotation={[Math.PI, 0, Math.PI]}
-        scale={[1, 1.5, 1.5]}
+        geometry={nodes.InnerWalls001.geometry}
+        material={innerWallsMaterial2}
+        position={[3, 1.116622, 0.965227]}
       />
     </group>
   );
