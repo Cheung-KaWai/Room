@@ -1,6 +1,14 @@
 import { Box, useGLTF, useTexture } from "@react-three/drei";
 import { useLayoutEffect, useRef, useState } from "react";
-import { Color, MeshBasicMaterial, MeshStandardMaterial, Raycaster, RepeatWrapping, Vector2, sRGBEncoding } from "three";
+import {
+  Color,
+  MeshBasicMaterial,
+  MeshStandardMaterial,
+  Raycaster,
+  RepeatWrapping,
+  Vector2,
+  sRGBEncoding,
+} from "three";
 import { useZustand } from "../hooks/useZustand";
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
@@ -12,7 +20,7 @@ export default function Room2({ ...props }) {
   const innerWalls = useRef();
   const ceiling = useRef();
 
-  const { nodes, materials } = useGLTF("/models/room2-transformed.glb");
+  const { nodes, materials } = useGLTF("/models/room.glb");
   const { camera } = useThree();
 
   const [click, setClick] = useState(true);
@@ -44,7 +52,7 @@ export default function Room2({ ...props }) {
   }, []);
 
   const { lightMapIntensity, envMapIntensity } = useControls({
-    lightMapIntensity: { value: 20, min: 0, max: 100, step: 1 },
+    lightMapIntensity: { value: 10, min: 0, max: 100, step: 1 },
     envMapIntensity: { value: 0.5, min: 0, max: 10, step: 0.1 },
   });
 
@@ -55,7 +63,7 @@ export default function Room2({ ...props }) {
 
   const ceilingMaterial = new MeshStandardMaterial();
   ceilingMaterial.lightMap = lightmapCeiling;
-  ceilingMaterial.lightMapIntensity = 50;
+  ceilingMaterial.lightMapIntensity = lightMapIntensity * 4;
   ceilingMaterial.envMapIntensity = envMapIntensity;
 
   //WALLS
@@ -122,11 +130,36 @@ export default function Room2({ ...props }) {
       }}
       onPointerUp={handleCamPosition}
     >
-      <mesh ref={ceiling} geometry={nodes.Ceiling.geometry} material={ceilingMaterial} position={[0, 2.906559, 0]} />
-      <mesh geometry={nodes.OuterWalls.geometry} material={materials["Material.004"]} position={[-2.9, 1.6, 0]} />
-      <mesh ref={innerWalls} geometry={nodes.InnerWalls.geometry} material={innerWallsMaterial} position={[3, 1.116622, 0.965227]} />
-      <mesh name="floor" ref={floor} geometry={nodes.Floor.geometry} material={floorMaterial} position={[0, 0.008951, 0]} />
-      <mesh geometry={nodes.Cube.geometry} material={nodes.Cube.material} position={[8.69703, 1.072963, -2.575509]} scale={[1, 1.5, 1.5]} />
+      <mesh
+        ref={ceiling}
+        geometry={nodes.Ceiling.geometry}
+        material={ceilingMaterial}
+        position={[0, 2.906559, 0]}
+      />
+      <mesh
+        geometry={nodes.OuterWalls.geometry}
+        material={materials["Material.004"]}
+        position={[-2.9, 1.6, 0]}
+      />
+      <mesh
+        ref={innerWalls}
+        geometry={nodes.InnerWalls.geometry}
+        material={innerWallsMaterial}
+        position={[3, 1.116622, 0.965227]}
+      />
+      <mesh
+        name="floor"
+        ref={floor}
+        geometry={nodes.Floor.geometry}
+        material={floorMaterial}
+        position={[0, 0.008951, 0]}
+      />
+      <mesh
+        geometry={nodes.Cube.geometry}
+        material={nodes.Cube.material}
+        position={[8.69703, 1.072963, -2.575509]}
+        scale={[1, 1.5, 1.5]}
+      />
       <mesh
         geometry={nodes.Cube001.geometry}
         material={nodes.Cube001.material}
@@ -138,4 +171,4 @@ export default function Room2({ ...props }) {
   );
 }
 
-useGLTF.preload("/models/room2-transformed.glb");
+useGLTF.preload("/models/room.glb");

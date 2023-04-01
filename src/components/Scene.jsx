@@ -8,6 +8,7 @@ import { CustomControls } from "./CustomControls";
 import { useZustand } from "../hooks/useZustand";
 import Room2 from "./Room2";
 import { Perf } from "r3f-perf";
+import { Sphere } from "./Sphere";
 
 export const Scene = () => {
   const updateStore = useZustand("update");
@@ -31,6 +32,7 @@ export const Scene = () => {
         <Environment preset="apartment" />
         <Suspense fallback={<Loader />}>
           <Room2 />
+          {/* <Sphere /> */}
         </Suspense>
         <Perf position="top-left" />
       </Canvas>

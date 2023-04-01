@@ -1,11 +1,5 @@
 uniform float uTime;
-
-varying vec3 vPosition;
-varying vec3 vNormal;
-varying vec2 vUv;
 varying float vDisplacement;
-
-#define PI 3.14
 
 float smoothMod(float axis, float amp, float rad){
     float top = cos(PI * (axis / amp)) * sin(PI * (axis / amp));
@@ -84,20 +78,4 @@ float noise(vec3 P){
   vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
   float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
   return 2.2 * n_xyz;
-}
-
-void main(){
-  vPosition = position;
-  vNormal = normal;
-  vUv = uv;
-
-  vec3 coords = normal;
-  coords.y += uTime/10.;
-  vec3 noisePattern = vec3(noise(coords));
-  vDisplacement = smoothMod(noisePattern.y*5.,1.0,1.5)*1.5 *0.5;
-
-  vec3 newPosition = position + normal * vDisplacement ;
-  vec4 modelViewPosition = modelViewMatrix * vec4(newPosition,1.0);
-  vec4 projectedPosition = projectionMatrix * modelViewPosition;
-  gl_Position = projectedPosition;
 }
