@@ -9,7 +9,7 @@ import { useZustand } from "../hooks/useZustand";
 import Room2 from "./Room2";
 import { Perf } from "r3f-perf";
 import { Sphere } from "./Sphere";
-import { Cube } from "./Cube";
+import { Cube } from "./decoration/Cube";
 
 export const Scene = () => {
   const updateStore = useZustand("update");

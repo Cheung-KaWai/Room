@@ -1,14 +1,6 @@
 import { Box, useGLTF, useTexture } from "@react-three/drei";
 import { useLayoutEffect, useRef, useState } from "react";
-import {
-  Color,
-  MeshBasicMaterial,
-  MeshStandardMaterial,
-  Raycaster,
-  RepeatWrapping,
-  Vector2,
-  sRGBEncoding,
-} from "three";
+import { Color, MeshBasicMaterial, MeshStandardMaterial, Raycaster, RepeatWrapping, Vector2, sRGBEncoding } from "three";
 import { useZustand } from "../hooks/useZustand";
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
@@ -55,7 +47,7 @@ export default function Room2({ ...props }) {
   const { lightMapIntensity, envMapIntensity, colorChoice } = useControls({
     lightMapIntensity: { value: 10, min: 0, max: 100, step: 1 },
     envMapIntensity: { value: 0, min: 0, max: 10, step: 0.1 },
-    colorChoice: { value: "#263e3b" },
+    colorChoice: { value: "#202a31" },
   });
 
   //CEILING
@@ -159,47 +151,13 @@ export default function Room2({ ...props }) {
       }}
       onPointerUp={handleCamPosition}
     >
-      <mesh
-        ref={ceiling}
-        geometry={nodes.Ceiling.geometry}
-        material={ceilingMaterial}
-        position={[0, 2.906559, 0]}
-      />
-      <mesh
-        geometry={nodes.OuterWalls.geometry}
-        material={materials["Material.004"]}
-        position={[-2.9, 1.6, 0]}
-      />
-      <mesh
-        ref={innerWalls}
-        geometry={nodes.InnerWalls.geometry}
-        material={innerWallsMaterial}
-        position={[3, 1.116622, 0.965227]}
-      />
-      <mesh
-        name="floor"
-        ref={floor}
-        geometry={nodes.Floor.geometry}
-        material={floorMaterial}
-        position={[0, 0.008951, 0]}
-      />
-      <mesh
-        ref={shelves}
-        geometry={nodes.Cube.geometry}
-        material={shelvesMaterial}
-        position={[8.69903, 1.072963, -2.575509]}
-        scale={[1, 1.5, 1.5]}
-      />
-      <mesh
-        geometry={nodes.InnerWalls001.geometry}
-        material={innerWallsMaterial2}
-        position={[3, 1.116622, 0.965227]}
-      />
-      <mesh
-        geometry={nodes.windows.geometry}
-        material={windowMaterial}
-        position={[3, 1.116622, 0.965227]}
-      />
+      <mesh ref={ceiling} geometry={nodes.Ceiling.geometry} material={ceilingMaterial} position={[0, 2.906559, 0]} />
+      <mesh geometry={nodes.OuterWalls.geometry} material={materials["Material.004"]} position={[-2.9, 1.6, 0]} />
+      <mesh ref={innerWalls} geometry={nodes.InnerWalls.geometry} material={innerWallsMaterial} position={[3, 1.116622, 0.965227]} />
+      <mesh name="floor" ref={floor} geometry={nodes.Floor.geometry} material={floorMaterial} position={[0, 0.008951, 0]} />
+      <mesh ref={shelves} geometry={nodes.Cube.geometry} material={shelvesMaterial} position={[8.69903, 1.072963, -2.575509]} scale={[1, 1.5, 1.5]} />
+      <mesh geometry={nodes.InnerWalls001.geometry} material={innerWallsMaterial2} position={[3, 1.116622, 0.965227]} />
+      <mesh geometry={nodes.windows.geometry} material={windowMaterial} position={[3, 1.116622, 0.965227]} />
     </group>
   );
 }
