@@ -54,7 +54,7 @@ export default function Room2({ ...props }) {
 
   const { lightMapIntensity, envMapIntensity, colorChoice } = useControls({
     lightMapIntensity: { value: 10, min: 0, max: 100, step: 1 },
-    envMapIntensity: { value: 0.5, min: 0, max: 10, step: 0.1 },
+    envMapIntensity: { value: 0, min: 0, max: 10, step: 0.1 },
     colorChoice: { value: "#263e3b" },
   });
 
@@ -91,7 +91,7 @@ export default function Room2({ ...props }) {
   innerWallsMaterial2.lightMapIntensity = 5;
   innerWallsMaterial2.envMapIntensity = 0;
   innerWallsMaterial2.aoMap = aoWalls;
-  innerWallsMaterial2.aoMapIntensity = 0.5;
+  innerWallsMaterial2.aoMapIntensity = 0.3;
   innerWallsMaterial2.color = new Color(colorChoice);
 
   //FLOOR
@@ -121,10 +121,10 @@ export default function Room2({ ...props }) {
   roughness.wrapT = RepeatWrapping;
 
   const floorMaterial = new MeshStandardMaterial();
-  floorMaterial.envMapIntensity = envMapIntensity;
+  floorMaterial.envMapIntensity = 0.5;
   floorMaterial.map = color;
   floorMaterial.normalMap = normal;
-  floorMaterial.normalScale = new Vector2(10, 10);
+  floorMaterial.normalScale = new Vector2(100, 100);
   floorMaterial.lightMap = lightMapFloor;
   floorMaterial.lightMapIntensity = lightMapIntensity;
   floorMaterial.roughnessMap = roughness;
@@ -137,7 +137,13 @@ export default function Room2({ ...props }) {
 
   const shelvesMaterial = new MeshStandardMaterial({
     map: colorShelves,
-    envMapIntensity: envMapIntensity,
+    envMapIntensity: 3,
+  });
+
+  //WINDOWS
+  const windowMaterial = new MeshStandardMaterial({
+    envMapIntensity: 100,
+    transparent: true,
   });
 
   return (
@@ -187,6 +193,11 @@ export default function Room2({ ...props }) {
       <mesh
         geometry={nodes.InnerWalls001.geometry}
         material={innerWallsMaterial2}
+        position={[3, 1.116622, 0.965227]}
+      />
+      <mesh
+        geometry={nodes.windows.geometry}
+        material={windowMaterial}
         position={[3, 1.116622, 0.965227]}
       />
     </group>

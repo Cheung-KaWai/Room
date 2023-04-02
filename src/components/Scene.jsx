@@ -9,6 +9,7 @@ import { useZustand } from "../hooks/useZustand";
 import Room2 from "./Room2";
 import { Perf } from "r3f-perf";
 import { Sphere } from "./Sphere";
+import { Cube } from "./Cube";
 
 export const Scene = () => {
   const updateStore = useZustand("update");
@@ -32,6 +33,7 @@ export const Scene = () => {
         <Environment preset="apartment" />
         <Suspense fallback={<Loader />}>
           <Room2 />
+          <Cube />
           {/* <Sphere /> */}
         </Suspense>
         <Perf position="top-left" />

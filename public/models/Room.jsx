@@ -16,6 +16,7 @@ export function Model(props) {
       <mesh geometry={nodes.Floor.geometry} material={materials['Material.004']} position={[0, 0.008951, 0]} />
       <mesh geometry={nodes.Cube.geometry} material={materials['Material.009']} position={[8.69703, 1.072963, -2.575509]} scale={[1, 1.5, 1.5]} />
       <mesh geometry={nodes.InnerWalls001.geometry} material={materials['Material.004']} position={[3, 1.116622, 0.965227]} />
+      <mesh geometry={nodes.windows.geometry} material={materials['Material.004']} position={[3, 1.116622, 0.965227]} />
     </group>
   )
 }
