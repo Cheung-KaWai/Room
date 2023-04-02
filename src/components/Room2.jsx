@@ -88,7 +88,7 @@ export default function Room2({ ...props }) {
 
   const innerWallsMaterial2 = new MeshStandardMaterial();
   innerWallsMaterial2.lightMap = lightMapWalls;
-  innerWallsMaterial2.lightMapIntensity = lightMapIntensity;
+  innerWallsMaterial2.lightMapIntensity = 5;
   innerWallsMaterial2.envMapIntensity = 0;
   innerWallsMaterial2.aoMap = aoWalls;
   innerWallsMaterial2.aoMapIntensity = 0.5;
