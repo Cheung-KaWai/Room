@@ -1,6 +1,6 @@
-import { Box, useGLTF, useTexture } from "@react-three/drei";
-import { useLayoutEffect, useRef, useState } from "react";
-import { Color, MeshBasicMaterial, MeshStandardMaterial, Raycaster, RepeatWrapping, Vector2, sRGBEncoding } from "three";
+import { useGLTF, useTexture } from "@react-three/drei";
+import { useRef, useState } from "react";
+import { Color, MeshStandardMaterial, Raycaster, RepeatWrapping, Vector2, sRGBEncoding } from "three";
 import { useZustand } from "../hooks/useZustand";
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
@@ -12,6 +12,7 @@ export default function Room2({ ...props }) {
   const innerWalls = useRef();
   const ceiling = useRef();
   const shelves = useRef();
+  const wall = useRef();
 
   const { nodes, materials } = useGLTF("/models/room.glb");
   const { camera } = useThree();

@@ -19,7 +19,7 @@ export const Scene = () => {
       <Canvas
         gl={{ physicallyCorrectLights: true, antialias: true }}
         dpr={[1, 2]}
-        camera={{ fov: 80 }}
+        camera={{ fov: 60 }}
         onPointerDown={() => {
           updateStore("locked", true);
         }}

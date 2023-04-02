@@ -1,7 +1,7 @@
 import { Box, Point, Text3D } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import React, { useEffect, useRef, useState } from "react";
-import { BufferGeometry, Color, Float32BufferAttribute, PointsMaterial, Vector3 } from "three";
+import { BufferGeometry, Color, Float32BufferAttribute, PointsMaterial, Raycaster, Vector2, Vector3 } from "three";
 import { MeshSurfaceSampler } from "three/examples/jsm/math/MeshSurfaceSampler.js";
 import { useDecoration } from "../../hooks/useDecoration";
 import { PixelCount } from "./PixelCount";
@@ -12,7 +12,6 @@ export const Cube = () => {
   const tempPosition = new Vector3();
   const vertices = [];
   const colors = [];
-
   const updateDecoration = useDecoration("update");
 
   let sampler;
@@ -32,17 +31,12 @@ export const Cube = () => {
 
   const addPoint = () => {
     sampler.sample(tempPosition);
-    /* Push the point coordinates */
     vertices.push(tempPosition.x, tempPosition.y, tempPosition.z);
-    /* Update the position attribute with the new coordinates */
     sparklesGeometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
 
     const color = colorPalet[Math.floor(Math.random() * colorPalet.length)];
-    /* Push the picked color */
     colors.push(color.r, color.g, color.b);
-    /* Update the color attribute with the new colors */
     sparklesGeometry.setAttribute("color", new Float32BufferAttribute(colors, 3));
-
     updateDecoration("amountVertex", vertices.length / 3);
   };
 
@@ -55,11 +49,15 @@ export const Cube = () => {
         clearInterval(addPointEverySecond);
       }
     }, 500);
+
+    return () => {
+      clearInterval(addPointEverySecond);
+    };
   }, []);
 
   return (
     <>
-      <Box ref={cube} visible={false} />
+      <Box ref={cube} name="cube" visible={false} position={[8.7, 1.25, -4.57]} scale={0.35} />
       <points ref={particleCube} geometry={sparklesGeometry} material={pointsMaterial} position={[8.7, 1.25, -4.57]} scale={0.15} />
       <PixelCount />
     </>
