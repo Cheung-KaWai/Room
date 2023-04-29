@@ -28,7 +28,7 @@ export const CustomControls = () => {
         camera-rotation={[-3.09, -0.75, -3.12]}
         lock={() => {}}
         isLocked={locked}
-        onChange={() => console.log(test.current.camera.rotation)}
+        // onChange={() => console.log(test.current.camera.rotation)}
       ></AnimatedCamera>
     </>
   );

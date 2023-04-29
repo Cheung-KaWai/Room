@@ -10,6 +10,9 @@ import Room2 from "./Room2";
 import { Perf } from "r3f-perf";
 import { Sphere } from "./Sphere";
 import { Cube } from "./decoration/Cube";
+import Table from "./Table";
+import { SimpleRoom } from "./SimpleRoom";
+import { useControls } from "leva";
 
 export const Scene = () => {
   const updateStore = useZustand("update");
@@ -27,14 +30,12 @@ export const Scene = () => {
           updateStore("locked", false);
         }}
       >
-        {/* <OrbitControls /> */}
-        <CustomControls />
-        <ambientLight intensity={0.5} />
+        <OrbitControls />
+        {/* <CustomControls /> */}
+        <ambientLight intensity={2.5} />
         <Environment preset="apartment" />
         <Suspense fallback={<Loader />}>
-          <Room2 />
-          <Cube />
-          {/* <Sphere /> */}
+          <SimpleRoom />
         </Suspense>
         <Perf position="top-left" />
       </Canvas>
