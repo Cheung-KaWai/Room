@@ -18,6 +18,7 @@ import { Sofa } from "./Sofa";
 import { Bed } from "./Bed";
 import { Photo } from "./Photo";
 import { MovieScreen } from "./MovieScreen";
+import { Remote } from "./Remote";
 
 export const Scene = () => {
   const updateStore = useZustand("update");
@@ -46,6 +47,7 @@ export const Scene = () => {
           <Bed />
           <Photo />
           <MovieScreen />
+          <Remote />
         </Suspense>
         <Perf position="top-left" />
       </Canvas>

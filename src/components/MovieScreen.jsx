@@ -5,10 +5,12 @@ Command: npx gltfjsx@6.1.4 screen.glb -T -p 6
 
 import React, { useRef } from "react";
 import { useGLTF, useVideoTexture } from "@react-three/drei";
+import { useDecoration } from "../hooks/useDecoration";
 
 export function MovieScreen(props) {
   const { nodes, materials } = useGLTF("/models/screen-transformed.glb");
-  const texture = useVideoTexture("/yourName.mp4", { muted: false, start: false });
+  const remote = useDecoration("remote");
+  const texture = useVideoTexture("/yourName.mp4", { muted: false, start: remote });
 
   return (
     <group

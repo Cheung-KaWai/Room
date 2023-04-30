@@ -9,9 +9,14 @@ export const cameraStore = create((set) => ({
 
 export const decorationStore = create((set) => ({
   amountVertex: 0,
+  remote: false,
+  toggleRemote: () =>
+    set((state) => ({
+      remote: !state.remote,
+    })),
   update: (name, value) => set({ [name]: value }),
 }));
 
 if (process.env.NODE_ENV === "development") {
-  mountStoreDevtool("Store", cameraStore);
+  mountStoreDevtool("decoration", decorationStore);
 }
