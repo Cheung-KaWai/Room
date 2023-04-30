@@ -13,6 +13,11 @@ import { Cube } from "./decoration/Cube";
 import Table from "./Table";
 import { SimpleRoom } from "./SimpleRoom";
 import { useControls } from "leva";
+import { Divider } from "./Divider";
+import { Sofa } from "./Sofa";
+import { Bed } from "./Bed";
+import { Photo } from "./Photo";
+import { MovieScreen } from "./MovieScreen";
 
 export const Scene = () => {
   const updateStore = useZustand("update");
@@ -36,6 +41,11 @@ export const Scene = () => {
         <Environment preset="apartment" />
         <Suspense fallback={<Loader />}>
           <SimpleRoom />
+          <Divider />
+          <Sofa />
+          <Bed />
+          <Photo />
+          <MovieScreen />
         </Suspense>
         <Perf position="top-left" />
       </Canvas>
