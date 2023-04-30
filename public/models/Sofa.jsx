@@ -10,7 +10,7 @@ export function Model(props) {
   const { nodes, materials } = useGLTF('/sofa-transformed.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[-0.18177, 0, 1.748561]} rotation={[0, -1.570535, 0]}>
+      <group position={[-0.18177, 0, 1.45994]} rotation={[0, -1.570535, 0]}>
         <mesh geometry={nodes.Thick_Piping_Sofa_1.geometry} material={materials['Coloured Fabric.005']} />
         <mesh geometry={nodes.Thick_Piping_Sofa_2.geometry} material={materials['Plastic Gloss Black']} />
       </group>

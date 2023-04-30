@@ -10,7 +10,7 @@ export function Sofa(props) {
   const { nodes, materials } = useGLTF("/models/sofa-transformed.glb");
   return (
     <group
-      position={[-0.18177, 0, 1.748561]}
+      position={[-0.18177, 0, 1.45994]}
       rotation={[0, -1.570535, 0]}
     >
       <mesh
