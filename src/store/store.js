@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export const cameraStore = create((set) => ({
   locked: false,
-  camPos: [-1.49, 1.7, -5.47],
+  camPos: [2, 0.8, 2.4],
   update: (name, value) => set({ [name]: value }),
 }));
 
@@ -19,4 +19,5 @@ export const decorationStore = create((set) => ({
 
 if (process.env.NODE_ENV === "development") {
   mountStoreDevtool("decoration", decorationStore);
+  mountStoreDevtool("camera", cameraStore);
 }

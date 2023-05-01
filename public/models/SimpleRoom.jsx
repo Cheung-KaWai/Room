@@ -10,11 +10,11 @@ export function Model(props) {
   const { nodes, materials } = useGLTF('/SimpleRoom-transformed.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh name="Walls" geometry={nodes.Walls.geometry} material={materials.Wall} />
-      <mesh name="Window" geometry={nodes.Window.geometry} material={materials.Wall} />
+      <mesh name="Walls" geometry={nodes.Walls.geometry} material={materials['Material.015']} />
+      <mesh name="Window" geometry={nodes.Window.geometry} material={materials['Material.015']} />
       <mesh name="WindowGlass" geometry={nodes.WindowGlass.geometry} material={materials.Glass} />
-      <mesh name="Ceiling" geometry={nodes.Ceiling.geometry} material={materials.Wall} />
-      <mesh name="Floor" geometry={nodes.Floor.geometry} material={materials.Wall} />
+      <mesh name="Floor" geometry={nodes.Floor.geometry} material={materials['Material.015']} />
+      <mesh name="Ceiling" geometry={nodes.Ceiling.geometry} material={materials['Material.015']} />
     </group>
   )
 }

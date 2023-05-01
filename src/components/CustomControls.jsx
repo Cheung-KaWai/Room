@@ -1,5 +1,5 @@
 import { PointerLockControls } from "@react-three/drei";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useZustand } from "../hooks/useZustand";
 import { animated, easings, useSpring } from "@react-spring/three";
 
@@ -7,6 +7,7 @@ export const CustomControls = () => {
   const locked = useZustand("locked");
   const camPos = useZustand("camPos");
   const test = useRef();
+  const [initRotation, setInitRotation] = useState([Math.PI / 2, 0, 0]);
 
   const AnimatedCamera = animated(PointerLockControls);
 
@@ -19,13 +20,25 @@ export const CustomControls = () => {
     },
   });
 
+  const { rotation } = useSpring({
+    rotation: initRotation,
+    config: {
+      easing: easings.easeInOutQuad,
+      duration: 2000,
+      precision: 0.0001,
+    },
+  });
+
+  useEffect(() => {
+    setInitRotation([0, 0, 0]);
+  }, []);
+
   return (
     <>
       <AnimatedCamera
         ref={test}
         makeDefault
         camera-position={position}
-        camera-rotation={[-3.09, -0.75, -3.12]}
         lock={() => {}}
         isLocked={locked}
         // onChange={() => console.log(test.current.camera.rotation)}

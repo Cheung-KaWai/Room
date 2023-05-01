@@ -13,42 +13,24 @@ export function Remote(props) {
 
   const handleClick = (e) => {
     e.stopPropagation();
+    console.log("hello");
     toggle();
   };
 
   return (
-    <group
-      {...props}
-      dispose={null}
-      onClick={handleClick}
-    >
-      <group
-        position={[0.491872, 1.473934, 0.649864]}
-        rotation={[0, Math.PI / 6, 0]}
-        scale={0.005975}
-      >
+    <group {...props} dispose={null} onClick={handleClick} name="remote">
+      <group position={[0.491872, 1.473934, 0.649864]} rotation={[0, Math.PI / 6, 0]} scale={0.005975} name="remote">
         <mesh
           geometry={nodes.polySurface5.geometry}
           material={materials["Material.013"]}
           position={[-1.756506, 0.542251, -3.647138]}
           scale={0.647922}
+          name="remote"
         />
       </group>
-      <group
-        position={[0.491872, 1.473934, 0.649864]}
-        rotation={[0, Math.PI / 6, 0]}
-        scale={0.005975}
-      >
-        <mesh
-          geometry={nodes.polySurface7.geometry}
-          material={materials["Material.013"]}
-          position={[0, 0.000014, 0.000014]}
-        />
-        <mesh
-          geometry={nodes.polySurface8.geometry}
-          material={materials["Material.013"]}
-          position={[0, 0.000014, 0.000014]}
-        />
+      <group position={[0.491872, 1.473934, 0.649864]} rotation={[0, Math.PI / 6, 0]} scale={0.005975} name="remote">
+        <mesh geometry={nodes.polySurface7.geometry} material={materials["Material.013"]} position={[0, 0.000014, 0.000014]} name="remote" />
+        <mesh geometry={nodes.polySurface8.geometry} material={materials["Material.013"]} position={[0, 0.000014, 0.000014]} name="remote" />
       </group>
       <mesh
         geometry={nodes.pCylinder20.geometry}
@@ -56,6 +38,7 @@ export function Remote(props) {
         position={[0.491872, 1.473934, 0.649864]}
         rotation={[0, Math.PI / 6, 0]}
         scale={0.005975}
+        name="remote"
       />
       <mesh
         geometry={nodes.pPipe1.geometry}
@@ -63,6 +46,7 @@ export function Remote(props) {
         position={[0.4351, 1.470366, 0.61117]}
         rotation={[Math.PI / 2, 0, -Math.PI / 6]}
         scale={[0.024203, 0.024203, 0.007236]}
+        name="remote"
       />
     </group>
   );
